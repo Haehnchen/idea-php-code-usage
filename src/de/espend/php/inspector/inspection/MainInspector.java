@@ -1,25 +1,15 @@
 package de.espend.php.inspector.inspection;
 
 
-import com.google.gson.Gson;
 import com.intellij.codeInspection.*;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.vcs.ex.DocumentWrapper;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
-import com.jetbrains.php.PhpClassHierarchyUtils;
-import com.jetbrains.php.lang.PhpLangUtil;
-import com.jetbrains.php.lang.psi.PhpPsiUtil;
+import com.jetbrains.php.lang.documentation.phpdoc.psi.PhpDocType;
+import com.jetbrains.php.lang.documentation.phpdoc.psi.tags.PhpDocTag;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.phpunit.PhpUnitUtil;
-import de.espend.php.inspector.inspection.vistors.ClassVisitor;
-import de.espend.php.inspector.inspection.vistors.MethodReferenceVisitor;
-import de.espend.php.inspector.inspection.vistors.NewExpressionVisitor;
-import de.espend.php.inspector.inspection.vistors.TypeHintVisitor;
-import de.espend.php.inspector.writer.XmlWriter;
-import fr.adrienbrault.idea.symfony2plugin.util.PhpElementsUtil;
-import org.apache.commons.lang.StringUtils;
+import de.espend.php.inspector.inspection.vistors.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONArray;
@@ -30,8 +20,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 public class MainInspector extends LocalInspectionTool {
@@ -40,7 +28,7 @@ public class MainInspector extends LocalInspectionTool {
     @Override
     public ProblemDescriptor[] checkFile(@NotNull PsiFile psiFile, @NotNull InspectionManager manager, boolean isOnTheFly) {
 
-        if(PhpUnitUtil.isPhpUnitTestFile(psiFile)) {
+        if(isOnTheFly || PhpUnitUtil.isPhpUnitTestFile(psiFile)) {
             return super.checkFile(psiFile, manager, isOnTheFly);
         }
 
@@ -105,6 +93,18 @@ public class MainInspector extends LocalInspectionTool {
 
                 if(element instanceof NewExpression) {
                     NewExpressionVisitor.visit((NewExpression) element, jsonObjects, filename);
+                }
+
+                if(element instanceof PhpUse) {
+                    UseVisitor.visit((PhpUse) element, jsonObjects, filename);
+                }
+
+                if(element instanceof PhpDocTag) {
+                    PhpDocTagVisitor.visit((PhpDocTag) element, jsonObjects, filename);
+                }
+
+                if(element instanceof PhpDocType) {
+                    PhpDocTypeVisitor.visit((PhpDocType) element, jsonObjects, filename);
                 }
 
                 if(element instanceof Parameter) {
