@@ -1,5 +1,6 @@
 package de.espend.php.inspector.inspection.vistors;
 
+import com.jetbrains.php.lang.documentation.phpdoc.psi.PhpDocComment;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -10,6 +11,17 @@ import java.util.List;
 public class ClassVisitor {
 
     public static void visit(PhpClass phpClass, List<JSONObject> jsonObjects, String filename) {
+
+        JSONObject classObj = new JSONObject();
+        classObj.put("type", "class");
+        classObj.put("class", phpClass.getPresentableFQN());
+
+        PhpDocComment phpDocComment = phpClass.getDocComment();
+        if(phpDocComment != null) {
+            classObj.put("doc_comment", phpDocComment.getText());
+        }
+
+        jsonObjects.add(classObj);
 
         ClassStructureContainer container = new ClassStructureContainer();
         isInstanceOf(container, phpClass, true);
