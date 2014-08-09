@@ -31,7 +31,7 @@ public class TypeHintVisitor {
                 obj.put("class", presentableFQN);
                 obj.put("is_interface", phpClass.isInterface());
                 obj.put("context", InspectionUtil.getContextString(classReference));
-                obj.put("key", filename + "-" + obj.getJSONObject("context").opt("line"));
+                obj.put("key", classReference.getTextRange().getStartOffset() + "-" + classReference.getTextRange().getEndOffset());
 
                 jsonObjects.add(obj);
             }

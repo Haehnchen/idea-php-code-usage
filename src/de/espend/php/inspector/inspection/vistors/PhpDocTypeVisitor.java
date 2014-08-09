@@ -23,7 +23,7 @@ public class PhpDocTypeVisitor {
                 classObj.put("type", "doc_type");
                 classObj.put("class", ((PhpClass) element).getPresentableFQN());
                 classObj.put("context", InspectionUtil.getContextString(phpDocType));
-                classObj.put("key", filename + "-" + classObj.getJSONObject("context").opt("line"));
+                classObj.put("key", phpDocType.getTextRange().getStartOffset() + "-" + phpDocType.getTextRange().getEndOffset());
 
                 jsonObjects.add(classObj);
 

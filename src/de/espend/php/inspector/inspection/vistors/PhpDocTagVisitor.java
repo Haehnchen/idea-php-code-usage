@@ -26,7 +26,7 @@ public class PhpDocTagVisitor {
                 classObj.put("type", "annotation");
                 classObj.put("class", phpClass.getPresentableFQN());
                 classObj.put("context", InspectionUtil.getContextString(phpDocTag));
-                classObj.put("key", filename + "-" + classObj.getJSONObject("context").opt("line"));
+                classObj.put("key", phpDocTag.getTextRange().getStartOffset() + "-" + phpDocTag.getTextRange().getEndOffset());
 
                 jsonObjects.add(classObj);
 

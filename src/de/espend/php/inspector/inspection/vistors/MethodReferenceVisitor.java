@@ -54,7 +54,7 @@ public class MethodReferenceVisitor {
             obj.put("methods", methodsJson);
             obj.put("class", currentClass.getPresentableFQN());
             obj.put("context", InspectionUtil.getContextString(methodReference));
-            obj.put("key", filename + "-" + obj.getJSONObject("context").opt("line"));
+            obj.put("key", methodReference.getTextRange().getStartOffset() + "-" + methodReference.getTextRange().getEndOffset());
             obj.put("name", methodReference.getName());
 
             methodReference.getTextRange().getStartOffset();

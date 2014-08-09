@@ -32,7 +32,7 @@ public class NewExpressionVisitor {
                     obj.put("class", presentableFQN);
                     obj.put("is_interface", phpClass.isInterface());
                     obj.put("context", InspectionUtil.getContextString(newExpression));
-                    obj.put("key", filename + "-" + obj.getJSONObject("context").opt("line"));
+                    obj.put("key", newExpression.getTextRange().getStartOffset() + "-" + newExpression.getTextRange().getEndOffset());
 
                     jsonObjects.add(obj);
                 }
