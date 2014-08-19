@@ -7,6 +7,9 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.jetbrains.php.lang.documentation.phpdoc.psi.PhpDocType;
 import com.jetbrains.php.lang.documentation.phpdoc.psi.tags.PhpDocTag;
+import com.jetbrains.php.lang.lexer.PhpTokenTypes;
+import com.jetbrains.php.lang.parser.PhpElementTypes;
+import com.jetbrains.php.lang.psi.PhpElementType;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.phpunit.PhpUnitUtil;
 import de.espend.php.inspector.inspection.vistors.*;
@@ -112,6 +115,10 @@ public class MainInspector extends LocalInspectionTool {
                     if(classRef instanceof ClassReference) {
                         TypeHintVisitor.visit((ClassReference) classRef, jsonObjects, filename);
                     }
+                }
+
+                if(element instanceof BinaryExpression && element.getNode().getElementType() == PhpElementTypes.INSTANCEOF_EXPRESSION) {
+                    InstanceOfVisitor.visit((BinaryExpression) element, jsonObjects, filename);
                 }
 
                 super.visitElement(element);
