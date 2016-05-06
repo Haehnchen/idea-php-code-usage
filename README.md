@@ -3,6 +3,10 @@
 (poc) Intellij plugin that extracts PHP file structure with code usages like class, interfaces, annotations.
 Also supports Symfony service because it fully reusage Intellij external Plugins.
 
+## Example Web App (not included)
+
+![Code-Usage Web](php-code-usage.png)
+
 ## Example
 
 ```javascript
