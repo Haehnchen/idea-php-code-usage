@@ -1,7 +1,7 @@
 package de.espend.php.inspector.inspection.vistors;
 
-import com.jetbrains.php.lang.psi.elements.ClassReference;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
+import com.jetbrains.php.lang.psi.elements.PhpReference;
 import com.jetbrains.php.lang.psi.elements.PhpUse;
 import de.espend.php.inspector.inspection.InspectionUtil;
 import fr.adrienbrault.idea.symfony2plugin.util.PhpElementsUtil;
@@ -13,7 +13,7 @@ public class UseVisitor {
 
     public static void visit(PhpUse phpUse, List<JSONObject> jsonObjects, String filename) {
 
-        ClassReference classReference = phpUse.getClassReference();
+        PhpReference classReference = phpUse.getTargetReference();
         if(classReference != null) {
             String classFQN = classReference.getFQN();
 

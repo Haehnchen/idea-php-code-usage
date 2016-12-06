@@ -1,7 +1,7 @@
 package de.espend.php.inspector.inspection;
 
+import com.intellij.diff.util.DiffUtil;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.vcs.ex.DocumentWrapper;
 import com.intellij.psi.PsiElement;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,7 +12,6 @@ public class InspectionUtil {
 
     public static JSONObject getContextString(PsiElement methodReference) {
         Document document = methodReference.getContainingFile().getViewProvider().getDocument();
-        DocumentWrapper documentWrapper = new DocumentWrapper(document);
 
         int inlineLine = document.getLineNumber(methodReference.getTextRange().getStartOffset());
         int startLine = inlineLine;
@@ -28,7 +27,7 @@ public class InspectionUtil {
 
         JSONArray jsonArray = new JSONArray();
 
-        List<String> lines = documentWrapper.getLines(startLine, endLine);
+        List<String> lines = DiffUtil.getLines(document, startLine, endLine);
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
             JSONObject context = new JSONObject();
@@ -51,5 +50,4 @@ public class InspectionUtil {
 
         return returnObject;
     }
-
 }
