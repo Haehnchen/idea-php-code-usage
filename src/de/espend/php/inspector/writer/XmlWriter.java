@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class XmlWriter {
 
-    private static Map<Project, XmlWriter> instances = new HashMap<Project, XmlWriter>();
+    private static Map<Project, XmlWriter> instances = new HashMap<>();
 
     public static XmlWriter getInstance(Project project) {
 

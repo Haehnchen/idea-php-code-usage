@@ -1,11 +1,8 @@
 package de.espend.php.inspector.visitor;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.jetbrains.php.lang.PhpFileType;
-import com.jetbrains.php.lang.documentation.phpdoc.psi.PhpDocType;
 import com.jetbrains.php.lang.psi.elements.ClassReference;
 import de.espend.php.inspector.inspection.vistors.ReturnTypeVisitor;
 import org.json.JSONObject;
@@ -29,7 +26,7 @@ public class ReturnTypeVisitorTest extends LightCodeInsightFixtureTestCase {
 
         PsiElement psiElement = myFixture.getFile().findElementAt(myFixture.getCaretOffset());
 
-        List<JSONObject> jsonObject = new ArrayList<JSONObject>();
+        List<JSONObject> jsonObject = new ArrayList<>();
 
         ReturnTypeVisitor.visit((ClassReference) psiElement.getParent(), jsonObject, "foobar");
 

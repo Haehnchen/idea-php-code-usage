@@ -23,28 +23,25 @@ public class MethodReferenceVisitor {
                 return;
             }
 
-            final List<Method> methods = new ArrayList<Method>();
+            final List<Method> methods = new ArrayList<>();
             methods.add((Method) psiElement);
 
-            PhpClassHierarchyUtils.processSuperMembers((Method) psiElement, new PhpClassHierarchyUtils.HierarchyClassMemberProcessor() {
-                @Override
-                public boolean process(PhpClassMember member, PhpClass subClass, PhpClass baseClass) {
-                    if ((member instanceof Method)) {
-                        Method superMethod = baseClass.findOwnMethodByName(member.getName());
-                        if (superMethod != null) {
-                            PhpModifier.Access superAccess = superMethod.getModifier().getAccess();
-                            PhpModifier.Access childAccess = member.getModifier().getAccess();
-                            if ((childAccess.isPrivate()) || (superAccess.isPrivate())) return false;
-                        }
-
-                        if (superMethod != null) {
-                            methods.add(superMethod);
-                        }
-
-                        return true;
+            PhpClassHierarchyUtils.processSuperMembers((Method) psiElement, (member, subClass, baseClass) -> {
+                if ((member instanceof Method)) {
+                    Method superMethod = baseClass.findOwnMethodByName(member.getName());
+                    if (superMethod != null) {
+                        PhpModifier.Access superAccess = superMethod.getModifier().getAccess();
+                        PhpModifier.Access childAccess = member.getModifier().getAccess();
+                        if ((childAccess.isPrivate()) || (superAccess.isPrivate())) return false;
                     }
-                    return false;
+
+                    if (superMethod != null) {
+                        methods.add(superMethod);
+                    }
+
+                    return true;
                 }
+                return false;
             });
 
             JSONObject obj = new JSONObject();

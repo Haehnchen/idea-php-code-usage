@@ -40,7 +40,7 @@ public class PhpDocTypeVisitorTest extends LightCodeInsightFixtureTestCase {
 
         PhpDocType phpDocType = PsiTreeUtil.findChildOfType(psiFile, PhpDocType.class);
 
-        List<JSONObject> jsonObject = new ArrayList<JSONObject>();
+        List<JSONObject> jsonObject = new ArrayList<>();
 
         PhpDocTypeVisitor.visit(phpDocType, jsonObject, "foobar");
 

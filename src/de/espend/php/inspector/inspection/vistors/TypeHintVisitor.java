@@ -1,9 +1,7 @@
 package de.espend.php.inspector.inspection.vistors;
 
 import com.jetbrains.php.lang.psi.elements.ClassReference;
-import com.jetbrains.php.lang.psi.elements.NewExpression;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
-import com.jetbrains.php.phpunit.PhpUnitUtil;
 import de.espend.php.inspector.inspection.InspectionUtil;
 import fr.adrienbrault.idea.symfony2plugin.util.PhpElementsUtil;
 import org.json.JSONObject;

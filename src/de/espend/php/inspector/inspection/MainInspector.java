@@ -84,7 +84,7 @@ public class MainInspector extends LocalInspectionTool {
 
         composerJson.put("file", filename);
 
-        final List<JSONObject> jsonObjects = new ArrayList<JSONObject>();
+        final List<JSONObject> jsonObjects = new ArrayList<>();
         psiFile.acceptChildren(new PsiRecursiveElementWalkingVisitor() {
             @Override
             public void visitElement(PsiElement element) {

@@ -2,7 +2,6 @@ package de.espend.php.inspector.inspection.vistors;
 
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiWhiteSpace;
-import com.jetbrains.php.lang.documentation.phpdoc.psi.PhpDocType;
 import com.jetbrains.php.lang.psi.elements.ClassReference;
 import de.espend.php.inspector.inspection.InspectionUtil;
 import org.jetbrains.annotations.NotNull;

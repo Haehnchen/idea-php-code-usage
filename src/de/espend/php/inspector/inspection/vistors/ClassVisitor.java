@@ -79,8 +79,8 @@ public class ClassVisitor {
 
     private static class ClassStructureContainer {
 
-        final private List<PhpClass> interfaces = new ArrayList<PhpClass>();
-        final private List<PhpClass> classes = new ArrayList<PhpClass>();
+        final private List<PhpClass> interfaces = new ArrayList<>();
+        final private List<PhpClass> classes = new ArrayList<>();
 
         public ClassStructureContainer() {
 
