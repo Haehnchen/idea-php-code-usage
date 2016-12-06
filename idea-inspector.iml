@@ -5,10 +5,16 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="org.json:json:20140107" level="project" />
+    <orderEntry type="library" name="php" level="project" />
+    <orderEntry type="library" name="css" level="project" />
+    <orderEntry type="library" name="java-i18n" level="project" />
+    <orderEntry type="library" name="properties" level="project" />
+    <orderEntry type="library" name="yaml" level="project" />
+    <orderEntry type="library" name="twig" level="project" />
   </component>
 </module>
-

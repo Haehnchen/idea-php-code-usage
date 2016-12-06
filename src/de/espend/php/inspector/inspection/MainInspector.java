@@ -1,15 +1,18 @@
 package de.espend.php.inspector.inspection;
 
 
-import com.intellij.codeInspection.*;
+import com.intellij.codeInspection.InspectionManager;
+import com.intellij.codeInspection.LocalInspectionTool;
+import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.PsiRecursiveElementWalkingVisitor;
 import com.jetbrains.php.lang.documentation.phpdoc.psi.PhpDocType;
 import com.jetbrains.php.lang.documentation.phpdoc.psi.tags.PhpDocTag;
-import com.jetbrains.php.lang.lexer.PhpTokenTypes;
 import com.jetbrains.php.lang.parser.PhpElementTypes;
-import com.jetbrains.php.lang.psi.PhpElementType;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.phpunit.PhpUnitUtil;
 import de.espend.php.inspector.inspection.vistors.*;
@@ -108,6 +111,14 @@ public class MainInspector extends LocalInspectionTool {
 
                 if(element instanceof PhpDocType) {
                     PhpDocTypeVisitor.visit((PhpDocType) element, jsonObjects, filename);
+                }
+
+                if(element instanceof PhpDocType) {
+                    PhpDocTypeVisitor.visit((PhpDocType) element, jsonObjects, filename);
+                }
+
+                if(element instanceof ClassReference) {
+                    ReturnTypeVisitor.visit((ClassReference) element, jsonObjects, filename);
                 }
 
                 if(element instanceof Parameter) {
